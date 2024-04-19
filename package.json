@@ -1,5 +1,5 @@
 {
-  "name": "momentum-modal-react",
+  "name": "@alikmanukian/momentum-modal-react",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -37,12 +37,12 @@
     "modal",
     "dialog"
   ],
-  "author": "Jose María Gómez<https://twitter.com/josegmdev>",
+  "author": "Aleksandr Manukyan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/josemariagomez/momentum-modal-react.git"
+    "url": "git+https://github.com/aleksandrrf/momentum-modal-react.git"
   },
-  "homepage": "https://github.com/josemariagomez/momentum-modal-react",
+  "homepage": "https://github.com/aleksandrrf/momentum-modal-react",
   "files": [
     "dist"
   ],
@@ -54,5 +54,9 @@
       "import": "./dist/momentum-modal-react.js",
       "require": "./dist/momentum-modal-react.umd.cjs"
     }
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/aleksandrrf/momentum-modal-react/issues"
+  },
+  "license": "ISC"
 }

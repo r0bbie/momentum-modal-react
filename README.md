@@ -30,10 +30,21 @@ Put the `Modal` component somewhere within the layout. Also, you can pass the co
 
 ```jsx
 // app.jsx
+
+// without chunks
 ...
 globalThis.resolveMomentumModal = (name) => {
     const modals = import.meta.glob("./modals/**/*.jsx", {eager: true});
     return modals[`./modals/${name}.jsx`];
+};
+createInertiaApp(...)
+...
+
+// without chunks
+...
+globalThis.resolveMomentumModal = (name) => {
+    const modals = import.meta.glob("./modals/**/*.jsx");
+    return modals[`./modals/${name}.jsx`]();
 };
 createInertiaApp(...)
 ...
@@ -46,27 +57,6 @@ export function YourLayout({children}) {
     {children}
     <Modal/>
   </>
-}
-```
-
-### In the component
-
-```jsx
-// YourLayout.jsx
-import {Modal} from 'momentum-modal-react';
-
-const resolver = (name) => {
-  const modals = import.meta.glob('../path/to/your/modals/**/*.jsx', {eager: true});
-  return modals[`../path/to/your/modals/${name}.jsx`];
-};
-
-export function YourLayout({children}) {
-  return (
-    <>
-      {children}
-      <Modal resolver={resolver} />
-    </>
-  );
 }
 ```
 
