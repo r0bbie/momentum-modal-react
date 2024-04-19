@@ -48,7 +48,7 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
     resetHeaders();
   };
 
-  const resolveComponent = () => {
+  const resolveComponent = async () => {
     if (typeof resolver !== 'function') {
       throw Error("Resolver function not defined. You have to define it at Inertia's entrypoint.");
     }
@@ -56,7 +56,7 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
       return close();
     }
 
-    const component = modal?.component ? resolver(modal.component) : null;
+    const component = modal?.component ? await resolver(modal.component) : null;
 
     setNonce(modal?.nonce);
     if (component) {
