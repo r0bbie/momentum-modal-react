@@ -60,6 +60,13 @@ const resolver = (name) => {
   return modals[`../path/to/your/modals/${name}.jsx`];
 };
 
+// or without eager loading;
+// this returns a Promise wrapped in a function which then gets called in the modal hook
+const resolver = (name) => {
+    const modals = import.meta.glob('../path/to/your/modals/**/*.jsx');
+    return modals[`../path/to/your/modals/${name}.jsx`];
+}
+
 export function YourLayout({children}) {
   return (
     <>
