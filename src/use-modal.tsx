@@ -57,7 +57,12 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
       return close();
     }
 
-    const component = modal?.component ? await resolver(modal.component) : null;
+    let component = modal?.component ? resolver(modal.component) : null;
+
+    // if the resolver returned a promise we must call it
+    if (typeof component === 'function') {
+      component = await component();
+    }
 
     setNonce(modal?.nonce);
     if (component) {
@@ -71,22 +76,22 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
   };
 
   useEffect(() => {
-    resolveComponent();
+    void resolveComponent().then(() => {
+      const handlePopState = () => setNonce(null);
 
-    const handlePopState = () => setNonce(null);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('popstate', handlePopState);
+      }
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('popstate', handlePopState);
-    }
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    });
   }, []);
 
   useEffect(() => {
     if (modal?.nonce !== nonce) {
-      resolveComponent();
+      void resolveComponent();
     }
   }, [modal]);
 
