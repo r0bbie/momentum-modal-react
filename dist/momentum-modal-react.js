@@ -127,14 +127,14 @@ function Er() {
         }
       return null;
     }
-    var P = Object.assign, M = 0, se, le, fe, ce, de, ve, pe;
+    var P = Object.assign, M = 0, se, le, ce, fe, de, ve, pe;
     function he() {
     }
     he.__reactDisabledLog = !0;
     function Ue() {
       {
         if (M === 0) {
-          se = console.log, le = console.info, fe = console.warn, ce = console.error, de = console.group, ve = console.groupCollapsed, pe = console.groupEnd;
+          se = console.log, le = console.info, ce = console.warn, fe = console.error, de = console.group, ve = console.groupCollapsed, pe = console.groupEnd;
           var e = {
             configurable: !0,
             enumerable: !0,
@@ -170,10 +170,10 @@ function Er() {
               value: le
             }),
             warn: P({}, e, {
-              value: fe
+              value: ce
             }),
             error: P({}, e, {
-              value: ce
+              value: fe
             }),
             group: P({}, e, {
               value: de
@@ -258,18 +258,18 @@ function Er() {
         if (R && n && typeof R.stack == "string") {
           for (var a = R.stack.split(`
 `), h = n.stack.split(`
-`), f = a.length - 1, c = h.length - 1; f >= 1 && c >= 0 && a[f] !== h[c]; )
-            c--;
-          for (; f >= 1 && c >= 0; f--, c--)
-            if (a[f] !== h[c]) {
-              if (f !== 1 || c !== 1)
+`), c = a.length - 1, f = h.length - 1; c >= 1 && f >= 0 && a[c] !== h[f]; )
+            f--;
+          for (; c >= 1 && f >= 0; c--, f--)
+            if (a[c] !== h[f]) {
+              if (c !== 1 || f !== 1)
                 do
-                  if (f--, c--, c < 0 || a[f] !== h[c]) {
+                  if (c--, f--, f < 0 || a[c] !== h[f]) {
                     var E = `
-` + a[f].replace(" at new ", " at ");
+` + a[c].replace(" at new ", " at ");
                     return e.displayName && E.includes("<anonymous>") && (E = E.replace("<anonymous>", e.displayName)), typeof e == "function" && N.set(e, E), E;
                   }
-                while (f >= 1 && c >= 0);
+                while (c >= 1 && f >= 0);
               break;
             }
         }
@@ -335,8 +335,8 @@ function Er() {
                 throw h.name = "Invariant Violation", h;
               }
               a = e[o](r, o, n, t, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
-            } catch (f) {
-              a = f;
+            } catch (c) {
+              a = c;
             }
             a && !(a instanceof Error) && (q(i), l("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", n || "React class", t, o, typeof a), q(null)), a instanceof Error && !(a.message in Ee) && (Ee[a.message] = !0, q(i), l("Failed %s type: %s", t, a.message), q(null));
           }
@@ -449,13 +449,13 @@ function Er() {
         for (u in r)
           $.call(r, u) && !He.hasOwnProperty(u) && (o[u] = r[u]);
         if (e && e.defaultProps) {
-          var f = e.defaultProps;
-          for (u in f)
-            o[u] === void 0 && (o[u] = f[u]);
+          var c = e.defaultProps;
+          for (u in c)
+            o[u] === void 0 && (o[u] = c[u]);
         }
         if (a || h) {
-          var c = typeof e == "function" ? e.displayName || e.name || "Unknown" : e;
-          a && er(o, c), h && rr(o, c);
+          var f = typeof e == "function" ? e.displayName || e.name || "Unknown" : e;
+          a && er(o, f), h && rr(o, f);
         }
         return tr(e, a, h, i, n, be.current, o);
       }
@@ -579,12 +579,12 @@ Check the top-level render call using <` + t + ">.");
           (e === void 0 || typeof e == "object" && e !== null && Object.keys(e).length === 0) && (a += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
           var h = ar();
           h ? a += h : a += Oe();
-          var f;
-          e === null ? f = "null" : H(e) ? f = "array" : e !== void 0 && e.$$typeof === s ? (f = "<" + (w(e.type) || "Unknown") + " />", a = " Did you accidentally export a JSX literal instead of a component?") : f = typeof e, l("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", f, a);
+          var c;
+          e === null ? c = "null" : H(e) ? c = "array" : e !== void 0 && e.$$typeof === s ? (c = "<" + (w(e.type) || "Unknown") + " />", a = " Did you accidentally export a JSX literal instead of a component?") : c = typeof e, l("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", c, a);
         }
-        var c = nr(e, r, t, i, u);
-        if (c == null)
-          return c;
+        var f = nr(e, r, t, i, u);
+        if (f == null)
+          return f;
         if (o) {
           var E = r.children;
           if (E !== void 0)
@@ -612,7 +612,7 @@ React keys must be passed directly to JSX without using spread:
   <%s key={someKey} {...props} />`, ee, C, dr, C), je[C + ee] = !0;
           }
         }
-        return e === m ? ur(c) : ir(c), c;
+        return e === m ? ur(f) : ir(f), f;
       }
     }
     function sr(e, r, t) {
@@ -621,8 +621,8 @@ React keys must be passed directly to JSX without using spread:
     function lr(e, r, t) {
       return xe(e, r, t, !1);
     }
-    var fr = lr, cr = sr;
-    Y.Fragment = m, Y.jsx = fr, Y.jsxs = cr;
+    var cr = lr, fr = sr;
+    Y.Fragment = m, Y.jsx = cr, Y.jsxs = fr;
   }()), Y;
 }
 var Fe;
@@ -650,12 +650,12 @@ function yr(T = null) {
     }), ne.defaults.headers.get["X-Inertia-Modal-Redirect"] = s?.redirectURL ?? "";
   }, A = () => {
     O(!1), _();
-  }, W = () => {
+  }, W = async () => {
     if (typeof p != "function")
       throw Error("Resolver function not defined. You have to define it at Inertia's entrypoint.");
     if (d == s?.nonce || !s?.component)
       return A();
-    const v = s?.component ? p(s.component) : null;
+    const v = s?.component ? await p(s.component) : null;
     if (b(s?.nonce), v) {
       const l = v.default;
       g(/* @__PURE__ */ ae.jsx(l, { ...j }, m));
