@@ -1,6 +1,7 @@
 import {router, usePage} from '@inertiajs/react';
 import {useEffect, useState, ReactNode} from 'react';
 import axios from 'axios';
+import { VisitOptions } from "@inertiajs/core";
 
 export function useModal(resolverCallback: CallableFunction | null = null) {
   const modal = usePage().props?.modal;
@@ -91,7 +92,7 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
 
   useEffect(updateHeaders, [key]);
 
-  const redirect = () => {
+  const redirect = (options: VisitOptions = {}) => {
     var redirectURL = modal?.redirectURL ?? modal?.baseURL;
 
     setVnode(false);
@@ -103,6 +104,7 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
     return router.visit(redirectURL, {
       preserveScroll: true,
       preserveState: true,
+      ...options
     });
   };
 
