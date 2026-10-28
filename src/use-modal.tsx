@@ -1,7 +1,34 @@
-import {router, usePage} from '@inertiajs/react';
+import {http, router, usePage} from '@inertiajs/react';
 import {useEffect, useState, ReactNode} from 'react';
-import axios from 'axios';
 import { VisitOptions } from "@inertiajs/core";
+
+// Modal headers for the current page, added to every Inertia request.
+// Inertia 3 sends requests with its own HTTP client, so these can't go on axios defaults.
+let modalHeaders: {key?: string | null; redirectURL?: string | null} = {};
+let requestHandlerRegistered = false;
+
+const registerRequestHandler = () => {
+  if (requestHandlerRegistered) {
+    return;
+  }
+
+  requestHandlerRegistered = true;
+
+  http.onRequest((config) => {
+    const headers = {...config.headers};
+
+    // The modal key is only sent on writes, so a redirect back to the modal keeps the same key
+    if (config.method !== 'get' && modalHeaders.key) {
+      headers['X-Inertia-Modal-Key'] = modalHeaders.key;
+    }
+
+    if (modalHeaders.redirectURL) {
+      headers['X-Inertia-Modal-Redirect'] = modalHeaders.redirectURL;
+    }
+
+    return {...config, headers};
+  });
+};
 
 export function useModal(resolverCallback: CallableFunction | null = null) {
   const modal = usePage().props?.modal;
@@ -14,34 +41,17 @@ export function useModal(resolverCallback: CallableFunction | null = null) {
 
   const resolver = resolverCallback !== null ? resolverCallback : globalThis.resolveMomentumModal;
 
-  const setHeaders = (values: Record<string, string | null>) => {
-    Object.entries(values).forEach(([key, value]) =>
-      ['post', 'put', 'patch', 'delete'].forEach((method) => {
-        /** @ts-ignore */
-        axios.defaults.headers[method][key] = value;
-      })
-    );
-  };
+  registerRequestHandler();
 
   const resetHeaders = () => {
-    const headers = ['X-Inertia-Modal-Key', 'X-Inertia-Modal-Redirect'];
-
-    /** @ts-ignore */
-    headers.forEach(([key, value]) =>
-      ['get', 'post', 'put', 'patch', 'delete'].forEach((method) => {
-        /** @ts-ignore */
-        delete axios.defaults.headers[method][key];
-      })
-    );
+    modalHeaders = {};
   };
 
   const updateHeaders = () => {
-    setHeaders({
-      'X-Inertia-Modal-Key': key,
-      'X-Inertia-Modal-Redirect': modal?.redirectURL,
-    });
-
-    axios.defaults.headers.get['X-Inertia-Modal-Redirect'] = modal?.redirectURL ?? '';
+    modalHeaders = {
+      key,
+      redirectURL: modal?.redirectURL,
+    };
   };
 
   const close = () => {

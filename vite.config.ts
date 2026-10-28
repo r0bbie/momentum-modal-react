@@ -12,7 +12,8 @@ export default defineConfig({
       fileName: 'momentum-modal-react',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@inertiajs/react', 'axios'],
+      // jsx-runtime must stay external, or React's element format gets bundled and breaks across React majors
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime', '@inertiajs/react', '@inertiajs/core'],
     },
   },
   plugins: [

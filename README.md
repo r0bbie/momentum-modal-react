@@ -13,12 +13,8 @@ Then install the react adapter:
 npm i momentum-modal-react
 ```
 
-> **Warning**
-> The package utilizes `axios` under the hood. If your app is already using `axios` as a dependency, make sure to lock it to the same version Inertia uses.
->
-> ```bash
-> npm i axios@1.2.0
-> ```
+> **Note**
+> Version 2 requires Inertia 3 and React 19. The modal headers are sent through Inertia's own HTTP client, so `axios` is no longer needed. For Inertia 1 or 2, use version 1.
 
 ## Setup
 

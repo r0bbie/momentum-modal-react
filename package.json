@@ -1,6 +1,6 @@
 {
   "name": "momentum-modal-react",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,15 +9,15 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "@inertiajs/react": "^2.0.0 || ^1.0.0",
-    "axios": "^1.2.0",
-    "react": "^19.0.0 || ^18.0.0",
-    "react-dom": "^19.0.0 || ^18.0.0"
+    "@inertiajs/react": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
-    "@types/react": "^19.1.8 ||^18.2.55",
-    "@types/react-dom": "^19.1.6 || ^18.2.19",
+    "@inertiajs/react": "^3.0.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.11.0",
@@ -27,7 +27,8 @@
     "typescript": "^5.8.2",
     "vite": "^7.0.5",
     "vite-plugin-dts": "^4.5.4",
-    "axios": "^1.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "description": "A react package that lets you implement backend-driven modal dialogs for Inertia apps.",
   "keywords": [
